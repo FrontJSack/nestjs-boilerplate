@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
 import { validationConfig } from './config/validation.config';
 import { databaseConfig } from './config/database.config';
 
@@ -19,6 +20,8 @@ import { databaseConfig } from './config/database.config';
       useFactory: databaseConfig,
       inject: [ConfigService],
     }),
+
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
