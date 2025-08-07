@@ -15,7 +15,7 @@ import { databaseConfig } from './config/database.config';
       validationSchema: validationConfig,
       envFilePath: ['.env.local', '.env'],
     }),
-    
+
     TypeOrmModule.forRootAsync({
       useFactory: databaseConfig,
       inject: [ConfigService],

@@ -70,7 +70,7 @@ Environment-based configuration
 Winston logging with different levels
 Performance optimizations
 
-## Description
+## Description of Framework
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 

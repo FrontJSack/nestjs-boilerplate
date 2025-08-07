@@ -1,10 +1,4 @@
-import {
-  Entity,
-  Column,
-  BeforeInsert,
-  BeforeUpdate,
-  Index,
-} from 'typeorm';
+import { Entity, Column, BeforeInsert, BeforeUpdate, Index } from 'typeorm';
 import { Exclude, Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import * as bcrypt from 'bcryptjs';
@@ -18,7 +12,7 @@ import { Role } from '../../common/enums/role.enum';
 export class User extends BaseEntity {
   @ApiProperty({ description: 'User email address' })
   @Column({ unique: true, length: 255 })
-  @Transform(({ value }) => value?.toLowerCase()?.trim())
+  @Transform(({ value }: { value: string }) => value?.toLowerCase()?.trim())
   email: string;
 
   @ApiProperty({ description: 'User first name' })
@@ -69,7 +63,7 @@ export class User extends BaseEntity {
   // Methods
   @BeforeInsert()
   @BeforeUpdate()
-  async hashPassword() {
+  async hashPassword(): Promise<void> {
     if (this.password && !this.password.startsWith('$2')) {
       const salt = await bcrypt.genSalt(10);
       this.password = await bcrypt.hash(this.password, salt);
@@ -77,6 +71,6 @@ export class User extends BaseEntity {
   }
 
   async validatePassword(password: string): Promise<boolean> {
-    return bcrypt.compare(password, this.password);
+    return await bcrypt.compare(password, this.password);
   }
 }
