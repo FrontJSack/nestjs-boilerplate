@@ -68,9 +68,8 @@ Pre-commit hooks with Husky
 Docker support with multi-stage builds
 Environment-based configuration
 Winston logging with different levels
-Performance optimizations
 
-## Description
+## Description of Framework
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
